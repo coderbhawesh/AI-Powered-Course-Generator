@@ -82,7 +82,8 @@ public class CourseService {
             moduleRepo.save(module);
         }
 
-        return mapToResponse(course);
+        CourseResponse response = mapToResponse(course);
+
     }
 
     private CourseDTO parse(String aiResponse) {
