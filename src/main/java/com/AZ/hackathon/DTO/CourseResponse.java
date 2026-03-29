@@ -1,5 +1,6 @@
 package com.AZ.hackathon.DTO;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;

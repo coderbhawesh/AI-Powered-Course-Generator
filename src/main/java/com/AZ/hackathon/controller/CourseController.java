@@ -6,10 +6,7 @@ import com.AZ.hackathon.service.CourseService;
 import com.AZ.hackathon.service.GeminiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("v1/api/course")
@@ -27,6 +24,12 @@ public class CourseController {
         return ResponseEntity.ok(
                 courseService.generateCourse(request.getTopic())
         );
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CourseResponse> getCourse(@PathVariable String id) {
+        CourseResponse courseResponse = courseService.getCourse(id);
+        return ResponseEntity.ok(courseResponse);
     }
 
     @PostMapping("/try")

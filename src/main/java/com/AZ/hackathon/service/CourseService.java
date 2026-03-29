@@ -27,22 +27,28 @@ public class CourseService {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+    public CourseResponse getCourse(String id){
+        Course course = courseRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Course not found"));
+        return mapToResponse(course);
+    }
+
     public CourseResponse generateCourse(String topic) {
 
         // 1. Call AI → get course structure JSON
-        String aiResponse = """
-                {
-          "title": "jehkee",
-          "description": "hello",
-          "modules": [
-            {
-              "title": "yowo",
-              "lessons": ["yuyu", "uwuw"]
-            }
-          ]
-        }
-        """;
-            //aiService.generateCourse(topic);
+//        String aiResponse = """
+//                {
+//          "title": "jehkee",
+//          "description": "hello",
+//          "modules": [
+//            {
+//              "title": "yowo",
+//              "lessons": ["yuyu", "uwuw"]
+//            }
+//          ]
+//        }
+//        """;
+        String aiResponse = aiService.generateCourse(topic);
 
 
         log.info("AI Response: {}", aiResponse);
@@ -59,6 +65,7 @@ public class CourseService {
         log.debug("checking course :{}", course);
 
         // 4. Save Modules + Lessons
+        List<String> moduleIds = new ArrayList<>();
         for (ModuleDTO m : dto.getModules()) {
 
             com.AZ.hackathon.entity.Module module = new Module();
@@ -80,9 +87,15 @@ public class CourseService {
             // Update module with lesson IDs
             module.setLessonIds(lessonIds);
             moduleRepo.save(module);
+            
+            moduleIds.add(module.getId());
         }
+        
+        // Update course with module IDs
+        course.setModuleIds(moduleIds);
+        courseRepo.save(course);
 
-        CourseResponse response = mapToResponse(course);
+        return mapToResponse(course);
 
     }
 
