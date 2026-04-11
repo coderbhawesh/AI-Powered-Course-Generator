@@ -20,10 +20,13 @@ import java.util.List;
 @Slf4j
 public class CourseService {
 
+    private static final int DEFAULT_YOUTUBE_RECOMMENDATION_COUNT = 5;
+
     private final AIService aiService;
     private final CourseRepository courseRepo;
     private final ModuleRepository moduleRepo;
     private final LessonRepository lessonRepo;
+    private final YouTubeService youTubeService;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -158,7 +161,22 @@ public class CourseService {
         }
 
         response.setModules(moduleResponses);
+        response.setYoutubeRecommendations(loadYouTubeRecommendations(course.getTitle()));
 
         return response;
+    }
+
+    private List<YouTubeVideoResponse> loadYouTubeRecommendations(String courseTitle) {
+        try {
+            YouTubeRecommendationResponse recommendationResponse =
+                    youTubeService.getRecommendationsByCourseName(courseTitle, DEFAULT_YOUTUBE_RECOMMENDATION_COUNT);
+            if (recommendationResponse.getRecommendations() == null) {
+                return List.of();
+            }
+            return recommendationResponse.getRecommendations();
+        } catch (Exception e) {
+            log.warn("Unable to fetch YouTube recommendations for course '{}': {}", courseTitle, e.getMessage());
+            return List.of();
+        }
     }
 }

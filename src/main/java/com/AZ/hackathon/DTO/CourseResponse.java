@@ -1,6 +1,5 @@
 package com.AZ.hackathon.DTO;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
@@ -11,4 +10,5 @@ public class CourseResponse {
     private String title;
     private String description;
     private List<ModuleResponse> modules;
+    private List<YouTubeVideoResponse> youtubeRecommendations;
 }
