@@ -239,4 +239,4 @@ The repository currently contains:
 - React frontend with a chat-style course generation flow
 - local-only secrets support through an ignored config file
 
-
+# just checking
