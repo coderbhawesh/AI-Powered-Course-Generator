@@ -4,7 +4,6 @@ import com.AZ.hackathon.entity.Course;
 import com.AZ.hackathon.repository.CourseRepository;
 import com.AZ.hackathon.service.PDFService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -86,14 +86,14 @@ public class CourseService {
                 lesson = lessonRepo.save(lesson);
                 lessonIds.add(lesson.getId());
             }
-            
+
             // Update module with lesson IDs
             module.setLessonIds(lessonIds);
             moduleRepo.save(module);
-            
+
             moduleIds.add(module.getId());
         }
-        
+
         // Update course with module IDs
         course.setModuleIds(moduleIds);
         courseRepo.save(course);
@@ -127,7 +127,6 @@ public class CourseService {
     }
 
     private CourseResponse mapToResponse(Course course) {
-
         CourseResponse response = new CourseResponse();
         response.setId(course.getId());
         response.setTitle(course.getTitle());
@@ -139,7 +138,6 @@ public class CourseService {
         List<ModuleResponse> moduleResponses = new ArrayList<>();
 
         for (Module module : modules) {
-
             ModuleResponse moduleResponse = new ModuleResponse();
             moduleResponse.setId(module.getId());
             moduleResponse.setTitle(module.getTitle());
