@@ -156,6 +156,27 @@ export JWT_SECRET="your_jwt_secret"
 export MONGODB_URI="mongodb://localhost:27017/lesson"
 ```
 
+For MongoDB Atlas or cloud deployment, use a full connection string instead of `localhost`. Example:
+
+```bash
+export MONGODB_URI="mongodb+srv://username:password@cluster0.virueoi.mongodb.net/lesson?retryWrites=true&w=majority&appName=Cluster0"
+```
+
+If your URI does not include a database name, also set:
+
+```bash
+export MONGODB_DATABASE="lesson"
+```
+
+Supported MongoDB environment variable names are:
+
+- `SPRING_DATA_MONGODB_URI`
+- `MONGODB_URI`
+- `MONGO_URL`
+- `MONGO_URI`
+- `SPRING_DATA_MONGODB_DATABASE`
+- `MONGODB_DATABASE`
+
 ### Frontend
 
 Create a local frontend env file from:
