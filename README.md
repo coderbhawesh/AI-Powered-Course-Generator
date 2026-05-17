@@ -177,6 +177,18 @@ Supported MongoDB environment variable names are:
 - `SPRING_DATA_MONGODB_DATABASE`
 - `MONGODB_DATABASE`
 
+For frontend deployments, allow your production frontend origin in the backend with one of:
+
+```bash
+export FRONTEND_URL="https://your-frontend-domain.vercel.app"
+```
+
+or
+
+```bash
+export APP_CORS_ALLOWED_ORIGINS="https://your-frontend-domain.vercel.app,https://your-custom-domain.com"
+```
+
 ### Frontend
 
 Create a local frontend env file from:
