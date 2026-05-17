@@ -8,6 +8,8 @@ const initialMessage = {
   type: "welcome",
   text: "Tell me what you want to learn, and I'll generate a course with lesson structure, video recommendations, and a PDF download option."
 };
+const loadingMessage =
+  "Generating your course now. This can take around 1 to 2 minutes, so thanks for waiting.";
 
 function App() {
   const [topic, setTopic] = useState("");
@@ -119,10 +121,13 @@ function App() {
               <div className="message assistant">
                 <div className="bubble">
                   <p className="message-role">Assistant</p>
-                  <div className="typing-dots" aria-label="Loading">
-                    <span />
-                    <span />
-                    <span />
+                  <div className="loading-state" aria-live="polite">
+                    <p className="loading-text">{loadingMessage}</p>
+                    <div className="typing-dots" aria-label="Loading">
+                      <span />
+                      <span />
+                      <span />
+                    </div>
                   </div>
                 </div>
               </div>

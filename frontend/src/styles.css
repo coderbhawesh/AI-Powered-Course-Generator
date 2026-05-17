@@ -294,6 +294,17 @@ textarea {
   font-weight: 600;
 }
 
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.loading-text {
+  margin: 0;
+  color: #405068;
+}
+
 .typing-dots {
   display: inline-flex;
   gap: 6px;
